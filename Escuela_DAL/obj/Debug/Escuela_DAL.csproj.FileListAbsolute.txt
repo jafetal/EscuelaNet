@@ -1,0 +1,5 @@
+C:\Users\Jared\Desktop\Jafet\CDIS\Etapa4\Escuela\Escuela_DAL\bin\Debug\Escuela_DAL.dll
+C:\Users\Jared\Desktop\Jafet\CDIS\Etapa4\Escuela\Escuela_DAL\bin\Debug\Escuela_DAL.pdb
+C:\Users\Jared\Desktop\Jafet\CDIS\Etapa4\Escuela\Escuela_DAL\obj\Debug\Escuela_DAL.dll
+C:\Users\Jared\Desktop\Jafet\CDIS\Etapa4\Escuela\Escuela_DAL\obj\Debug\Escuela_DAL.pdb
+C:\Users\Jared\Desktop\Jafet\CDIS\Etapa4\Escuela\Escuela_DAL\obj\Debug\Escuela_DAL.csprojAssemblyReference.cache
