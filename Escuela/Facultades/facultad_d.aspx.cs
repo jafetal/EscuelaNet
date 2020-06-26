@@ -9,16 +9,23 @@ using System.Web.UI.WebControls;
 
 namespace Escuela.Facultades
 {
-    public partial class facultad_d : System.Web.UI.Page
+    public partial class facultad_d : System.Web.UI.Page, IAcceso
     {
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                int id = int.Parse(Request.QueryString["pId"]);
-                cargarUniversidades();
-                cargarFacultad(id);
+                if (sessionIniciada())
+                {
+                    int id = int.Parse(Request.QueryString["pId"]);
+                    cargarUniversidades();
+                    cargarFacultad(id);
+                }
+                else
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
             }
         }
 
@@ -69,6 +76,18 @@ namespace Escuela.Facultades
             int id = int.Parse(lblId.Text);
 
             facuBLL.eliminarFacultad(id);
+        }
+
+        public bool sessionIniciada()
+        {
+            if (Session["Usuario"] != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         #endregion
     }

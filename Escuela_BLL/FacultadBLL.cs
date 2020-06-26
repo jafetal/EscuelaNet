@@ -18,7 +18,29 @@ namespace Escuela_BLL
         public void agregarFacultad(string codigo, string nombre, DateTime fechaCreacion, int universidad)
         {
             FacultadDAL facultad = new FacultadDAL();
-            facultad.agregarfacultad(codigo, nombre, fechaCreacion, universidad);
+            DataTable dtfacultad = new DataTable();
+
+            dtfacultad = cargarFacultadCod(codigo);
+
+            if (dtfacultad.Rows.Count > 0)
+            {
+                throw new Exception("El código ya existe en la base de datos.");
+            }
+            else
+            {
+                if (fechaCreacion.Year < 1900)
+                {
+                    throw new Exception("Fecha no permitida, introduce una fecha mayor a 1900.");
+                }
+                else if (fechaCreacion.Year > 2010)
+                {
+                    throw new Exception("Fecha no permitida, introduce una fecha menor que 2010.");
+                }
+                else
+                {
+                    facultad.agregarfacultad(codigo, nombre, fechaCreacion, universidad);
+                }
+            }
         }
 
         public DataTable cargarFacultad(int matricula)
@@ -30,13 +52,43 @@ namespace Escuela_BLL
         public void modificarFacultad(int id, string codigo, string nombre, DateTime fechaCreacion, int universidad)
         {
             FacultadDAL facultad = new FacultadDAL();
-            facultad.modificarFacultad(id, codigo, nombre, fechaCreacion, universidad);
+
+
+            DataTable dtfacultad = new DataTable();
+
+            dtfacultad = cargarFacultadCod(codigo);
+
+            if (dtfacultad.Rows.Count > 0)
+            {
+                throw new Exception("El código ya existe en la base de datos.");
+            }
+            else
+            {
+                if (fechaCreacion.Year < 1900)
+                {
+                    throw new Exception("Fecha no permitida, introduce una fecha mayor a 1900.");
+                }
+                else if (fechaCreacion.Year > 2010)
+                {
+                    throw new Exception("Fecha no permitida, introduce una fecha menor que 2010.");
+                }
+                else
+                {
+                    facultad.modificarFacultad(id, codigo, nombre, fechaCreacion, universidad);
+                }
+            }
         }
 
         public void eliminarFacultad(int matricula)
         {
             FacultadDAL facultad = new FacultadDAL();
             facultad.eliminarFacultad(matricula);
+        }
+
+        public DataTable cargarFacultadCod(string codigo)
+        {
+            FacultadDAL facultad = new FacultadDAL();
+            return facultad.cargarFacultadcod(codigo);
         }
     }
 }

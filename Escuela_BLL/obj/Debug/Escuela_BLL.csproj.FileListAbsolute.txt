@@ -6,3 +6,11 @@ C:\Users\Jared\Desktop\Jafet\CDIS\Etapa4\Escuela\Escuela_BLL\obj\Debug\Escuela_B
 C:\Users\Jared\Desktop\Jafet\CDIS\Etapa4\Escuela\Escuela_BLL\obj\Debug\Escuela_BLL.pdb
 C:\Users\Jared\Desktop\Jafet\CDIS\Etapa4\Escuela\Escuela_BLL\obj\Debug\Escuela_BLL.csprojAssemblyReference.cache
 C:\Users\Jared\Desktop\Jafet\CDIS\Etapa4\Escuela\Escuela_BLL\obj\Debug\Escuela_BLL.csproj.CopyComplete
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\bin\Debug\Escuela_BLL.dll
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\bin\Debug\Escuela_BLL.pdb
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\bin\Debug\Escuela_DAL.dll
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\bin\Debug\Escuela_DAL.pdb
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\obj\Debug\Escuela_BLL.csprojAssemblyReference.cache
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\obj\Debug\Escuela_BLL.csproj.CopyComplete
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\obj\Debug\Escuela_BLL.dll
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\obj\Debug\Escuela_BLL.pdb

@@ -80,6 +80,31 @@ namespace Escuela_DAL
             return dtFacultad;
         }
 
+        public DataTable cargarFacultadcod(string codigo)
+        {
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = @"Server=DESKTOP-1NP1QCU\SQLEXPRESS;Database=Escuela;Trusted_connection=true";
+
+            SqlCommand command = new SqlCommand();
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "sp_cargarFacultadCodigo";
+            command.Connection = connection;
+
+            command.Parameters.AddWithValue("pCodigo", codigo);
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataTable dtFacultad = new DataTable();
+
+            connection.Open();
+
+            adapter.SelectCommand = command;
+            adapter.Fill(dtFacultad);
+
+            connection.Close();
+
+            return dtFacultad;
+        }
+
         public void modificarFacultad(int id, string codigo, string nombre, DateTime fechaCreacion, int universidad)
         {
             SqlConnection connection = new SqlConnection();

@@ -10,7 +10,7 @@ using Escuela_BLL;
 
 namespace Escuela.Alumnos
 {
-    public partial class alumno_u : System.Web.UI.Page
+    public partial class alumno_u : System.Web.UI.Page, IAcceso
     {
  
     #region Eventos
@@ -18,9 +18,16 @@ namespace Escuela.Alumnos
         {
             if (!IsPostBack)
             {
-                int matricula = int.Parse(Request.QueryString["pMatricula"]);
-                cargarFacultades();
-                cargarAlumno(matricula);
+                if (sessionIniciada())
+                {
+                    int matricula = int.Parse(Request.QueryString["pMatricula"]);
+                    cargarFacultades();
+                    cargarAlumno(matricula);
+                }
+                else
+                {
+                    Response.Redirect("~/Login.aspx");
+                }
             }
         }
 
@@ -72,6 +79,19 @@ namespace Escuela.Alumnos
             int facultad = int.Parse(ddlFacultad.SelectedValue);
 
             alumBLL.modificarAlumno(matricula, nombre, fechaNacimiento, semestre, facultad);
+        }
+
+
+        public bool sessionIniciada()
+        {
+            if (Session["Usuario"] != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         #endregion
 
