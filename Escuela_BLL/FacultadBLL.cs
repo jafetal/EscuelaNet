@@ -15,7 +15,7 @@ namespace Escuela_BLL
             FacultadDAL facultad = new FacultadDAL();
             return facultad.cargarFacultades();
         }
-        public void agregarFacultad(string codigo, string nombre, DateTime fechaCreacion, int universidad)
+        public void agregarFacultad(string codigo, string nombre, DateTime fechaCreacion, int universidad, int ciudad)
         {
             FacultadDAL facultad = new FacultadDAL();
             DataTable dtfacultad = new DataTable();
@@ -38,7 +38,7 @@ namespace Escuela_BLL
                 }
                 else
                 {
-                    facultad.agregarfacultad(codigo, nombre, fechaCreacion, universidad);
+                    facultad.agregarfacultad(codigo, nombre, fechaCreacion, universidad,ciudad);
                 }
             }
         }
@@ -49,7 +49,7 @@ namespace Escuela_BLL
             return facultad.cargarFacultad(matricula);
         }
 
-        public void modificarFacultad(int id, string codigo, string nombre, DateTime fechaCreacion, int universidad)
+        public void modificarFacultad(int id, string codigo, string nombre, DateTime fechaCreacion, int universidad, int ciudad)
         {
             FacultadDAL facultad = new FacultadDAL();
 
@@ -74,7 +74,7 @@ namespace Escuela_BLL
                 }
                 else
                 {
-                    facultad.modificarFacultad(id, codigo, nombre, fechaCreacion, universidad);
+                    facultad.modificarFacultad(id, codigo, nombre, fechaCreacion, universidad, ciudad);
                 }
             }
         }

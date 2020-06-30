@@ -6,11 +6,12 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
+    <link href="Content/login.css" rel="stylesheet" />
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="formLogin" runat="server">
         <div>
-
+            <div id="imgLogin"></div>
             <table>
                 <tr>
                     <td>Nombre de Usuario:</td>

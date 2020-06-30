@@ -46,6 +46,17 @@
                     ErrorMessage="La Universidad es requerida" ValidationGroup="vlg1" InitialValue="0" Display="Dynamic"></asp:RequiredFieldValidator>
             </td>
         </tr>
+
+        <tr>
+            <td>Estado:</td>
+            <td>
+                <asp:DropDownList ID="ddlEstados" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlEstados_SelectedIndexChanged"></asp:DropDownList></td>
+        </tr>
+        <tr>
+            <td>Ciudad:</td>
+            <td>
+                <asp:DropDownList ID="ddlCiudad" runat="server"></asp:DropDownList></td>
+        </tr>
          <tr>
             <td></td>
             <td>

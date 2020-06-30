@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlumnoBLL.cs" />
+    <Compile Include="CiudadBLL.cs" />
+    <Compile Include="EstadoBLL.cs" />
     <Compile Include="FacultadBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UniversidadBLL.cs" />

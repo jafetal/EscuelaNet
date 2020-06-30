@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace Escuela.Facultades
 {
-    public partial class facultad_d : System.Web.UI.Page, IAcceso
+    public partial class facultad_d : TemaEscuela, IAcceso
     {
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)

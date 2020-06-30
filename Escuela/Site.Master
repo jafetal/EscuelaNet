@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Escuela.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" EnableTheming="true" CodeBehind="Site.master.cs" Inherits="Escuela.SiteMaster" %>
 
 <!DOCTYPE html>
 
@@ -13,7 +13,9 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Scripts/jquery-ui.css" rel="stylesheet" />
+    <link href="Content/chosen.css" rel="stylesheet" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -35,6 +37,8 @@
                 <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
+                <asp:ScriptReference Path="~/Scripts/jquery-ui.js" />
+                <asp:ScriptReference Path="~/Scripts/chosen.jquery.js" />
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>

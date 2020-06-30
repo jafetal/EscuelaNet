@@ -9,7 +9,7 @@ using Escuela_BLL;
 
 namespace Escuela.Facultades
 {
-    public partial class facultad_i : System.Web.UI.Page, IAcceso
+    public partial class facultad_i : TemaEscuela, IAcceso
     {
         #region evento
         protected void Page_Load(object sender, EventArgs e)
@@ -19,7 +19,9 @@ namespace Escuela.Facultades
                 if (sessionIniciada())
                 {
                     cargarUniversidades();
+                    cargarEstados();
                     cargarTable();
+
                 }
                 else
                 {
@@ -34,6 +36,19 @@ namespace Escuela.Facultades
             Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", "alert('FAcultad agregada exitosamente')", true);
         }
 
+        protected void ddlEstados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlEstados.SelectedIndex != 0)
+            {
+                ddlCiudad.Items.Clear();
+                cargarCiudades();
+            }
+            else
+            {
+                ddlCiudad.Items.Clear();
+            }
+        }
+
         #endregion
 
         #region Métodos
@@ -45,10 +60,10 @@ namespace Escuela.Facultades
             string nombre = txtNombre.Text;
             DateTime fechaCreacion = Convert.ToDateTime(txtFecha.Text);
             int universidad = int.Parse(ddlUniversidad.SelectedValue);
-
+            int ciudad = int.Parse(ddlCiudad.SelectedValue);
             try
             {
-                facuBLL.agregarFacultad(codigo, nombre, fechaCreacion, universidad);
+                facuBLL.agregarFacultad(codigo, nombre, fechaCreacion, universidad,ciudad);
                 limpiarCampos();
 
                 DataTable dtFacultades = new DataTable();
@@ -98,6 +113,35 @@ namespace Escuela.Facultades
             txtNombre.Text = "";
             ddlUniversidad.SelectedIndex = 0;
         }
+        public void cargarEstados()
+        {
+            EstadoBLL estado = new EstadoBLL();
+            DataTable dtEstados = new DataTable();
+
+            dtEstados = estado.cargarEstados();
+
+            ddlEstados.DataSource = dtEstados;
+            ddlEstados.DataTextField = "nombre";
+            ddlEstados.DataValueField = "ID_Estado";
+            ddlEstados.DataBind();
+
+            ddlEstados.Items.Insert(0, new ListItem("---- Seleccione Estado ----", "0"));
+        }
+
+        public void cargarCiudades()
+        {
+            CiudadBLL estado = new CiudadBLL();
+            DataTable dtCiudades = new DataTable();
+
+            dtCiudades = estado.cargarCiudadesPorEstado(int.Parse(ddlEstados.SelectedValue));
+
+            ddlCiudad.DataSource = dtCiudades;
+            ddlCiudad.DataTextField = "nombre";
+            ddlCiudad.DataValueField = "ID_Ciudad";
+            ddlCiudad.DataBind();
+
+            ddlCiudad.Items.Insert(0, new ListItem("---- Seleccione Ciudad ----", "0"));
+        }
         public bool sessionIniciada()
         {
             if (Session["Usuario"] != null)
@@ -111,5 +155,7 @@ namespace Escuela.Facultades
         }
 
         #endregion
+
+        
     }
 }

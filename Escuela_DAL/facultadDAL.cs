@@ -33,7 +33,7 @@ namespace Escuela_DAL
             return dtFacultades;
         }
 
-        public void agregarfacultad(string codigo, string nombre, DateTime fechaCreacion, int universidad)
+        public void agregarfacultad(string codigo, string nombre, DateTime fechaCreacion, int universidad, int ciudad)
         {
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = @"Server=DESKTOP-1NP1QCU\SQLEXPRESS;Database=Escuela;Trusted_connection=true";
@@ -47,6 +47,7 @@ namespace Escuela_DAL
             command.Parameters.AddWithValue("pNombre", nombre);
             command.Parameters.AddWithValue("pFecha", fechaCreacion);
             command.Parameters.AddWithValue("pUniversidad", universidad);
+            command.Parameters.AddWithValue("pCiudad", ciudad);
 
             connection.Open();
 
@@ -105,7 +106,7 @@ namespace Escuela_DAL
             return dtFacultad;
         }
 
-        public void modificarFacultad(int id, string codigo, string nombre, DateTime fechaCreacion, int universidad)
+        public void modificarFacultad(int id, string codigo, string nombre, DateTime fechaCreacion, int universidad, int ciudad)
         {
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = @"Server=DESKTOP-1NP1QCU\SQLEXPRESS;Database=Escuela;Trusted_connection=true";
@@ -120,7 +121,7 @@ namespace Escuela_DAL
             command.Parameters.AddWithValue("pNombre", nombre);
             command.Parameters.AddWithValue("pFecha", fechaCreacion);
             command.Parameters.AddWithValue("pUniversidad", universidad);
-
+            command.Parameters.AddWithValue("pCiudad", ciudad);
             connection.Open();
 
             command.ExecuteNonQuery();

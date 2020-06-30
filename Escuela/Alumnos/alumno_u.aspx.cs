@@ -10,7 +10,7 @@ using Escuela_BLL;
 
 namespace Escuela.Alumnos
 {
-    public partial class alumno_u : System.Web.UI.Page, IAcceso
+    public partial class alumno_u : TemaEscuela, IAcceso
     {
  
     #region Eventos
