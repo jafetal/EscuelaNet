@@ -150,3 +150,6 @@ C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela\obj\Debug\Escuela.csprojA
 C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela\obj\Debug\Escuela.csproj.CopyComplete
 C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela\obj\Debug\Escuela.dll
 C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela\obj\Debug\Escuela.pdb
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela\bin\EntityFramework.dll
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela\bin\Escuela_DAL.dll.config
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela\bin\EntityFramework.xml

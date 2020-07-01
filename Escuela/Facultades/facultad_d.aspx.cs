@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Escuela_DAL;
 
 namespace Escuela.Facultades
 {
@@ -42,25 +43,25 @@ namespace Escuela.Facultades
         public void cargarFacultad(int id)
         {
             FacultadBLL facuBLL = new FacultadBLL();
-            DataTable dtfacu = new DataTable();
+            Facultad facu = new Facultad();
 
-            dtfacu = facuBLL.cargarFacultad(id);
+            facu = facuBLL.cargarFacultad(id);
 
-            lblId.Text = dtfacu.Rows[0]["ID_Facultad"].ToString();
-            lblcodigo.Text = dtfacu.Rows[0]["codigo"].ToString();
-            lblNombre.Text = dtfacu.Rows[0]["nombre"].ToString();
-            lblFecha.Text = dtfacu.Rows[0]["fechaCreacion"].ToString().Substring(0, 10);
-            ddlUniversidad.SelectedValue = dtfacu.Rows[0]["universidad"].ToString();
+            lblId.Text = facu.ID_Facultad.ToString();
+            lblcodigo.Text = facu.codigo;
+            lblNombre.Text = facu.nombre;
+            lblFecha.Text = facu.fechaCreacion.ToString().Substring(0, 10);
+            ddlUniversidad.SelectedValue = facu.universidad.ToString();
         }
 
         public void cargarUniversidades()
         {
             UniversidadBLL uniBLL = new UniversidadBLL();
-            DataTable dtUniversidades = new DataTable();
+            List<Universidad> listUniversidades = new List<Universidad>();
 
-            dtUniversidades = uniBLL.cargarUniversidades();
+            listUniversidades = uniBLL.cargarUniversidades();
 
-            ddlUniversidad.DataSource = dtUniversidades;
+            ddlUniversidad.DataSource = listUniversidades;
             ddlUniversidad.DataTextField = "nombre";
             ddlUniversidad.DataValueField = "ID_Universidad";
             ddlUniversidad.DataBind();

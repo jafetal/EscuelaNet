@@ -5,90 +5,128 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Escuela_DAL;
+using System.Transactions;
 
 namespace Escuela_BLL
 {
     public class FacultadBLL
     {
-        public DataTable cargarFacultades()
+        public List<object> cargarFacultades()
         {
             FacultadDAL facultad = new FacultadDAL();
             return facultad.cargarFacultades();
         }
-        public void agregarFacultad(string codigo, string nombre, DateTime fechaCreacion, int universidad, int ciudad)
+        public void agregarFacultad(Facultad paramFacultad, List<MateriaFacultad> listMaterias)
         {
             FacultadDAL facultad = new FacultadDAL();
-            DataTable dtfacultad = new DataTable();
+            Facultad facu = new Facultad();
+            MateriaFacultadBLL matFacuBLL = new MateriaFacultadBLL();
 
-            dtfacultad = cargarFacultadCod(codigo);
+            facu = facultad.cargarFacultadcod(paramFacultad.codigo);
 
-            if (dtfacultad.Rows.Count > 0)
+            if (facu!=null)
             {
                 throw new Exception("El código ya existe en la base de datos.");
             }
             else
             {
-                if (fechaCreacion.Year < 1900)
-                {
-                    throw new Exception("Fecha no permitida, introduce una fecha mayor a 1900.");
-                }
-                else if (fechaCreacion.Year > 2010)
-                {
-                    throw new Exception("Fecha no permitida, introduce una fecha menor que 2010.");
-                }
-                else
-                {
-                    facultad.agregarfacultad(codigo, nombre, fechaCreacion, universidad,ciudad);
-                }
+
+                    if (paramFacultad.fechaCreacion.Year < 1900)
+                    {
+                        throw new Exception("Fecha no permitida, introduce una fecha mayor a 1900.");
+                    }
+                    else if (paramFacultad.fechaCreacion.Year > 2010)
+                    {
+                        throw new Exception("Fecha no permitida, introduce una fecha menor que 2010.");
+                    }
+                    else
+                    {
+                        using (TransactionScope ts = new TransactionScope())
+                        {
+                            facultad.agregarfacultad(paramFacultad);
+                            foreach (MateriaFacultad materia in listMaterias)
+                            {
+                                materia.facultad = paramFacultad.ID_Facultad;
+                                matFacuBLL.agregarMateriaFacultad(materia);
+                                Console.WriteLine("YEI");
+                            }
+
+                            ts.Complete();
+                        }
+                    }
             }
         }
 
-        public DataTable cargarFacultad(int matricula)
+        public Facultad cargarFacultad(int matricula)
         {
             FacultadDAL facultad = new FacultadDAL();
             return facultad.cargarFacultad(matricula);
         }
 
-        public void modificarFacultad(int id, string codigo, string nombre, DateTime fechaCreacion, int universidad, int ciudad)
+        public void modificarFacultad(Facultad paramFacultad, List<MateriaFacultad> listMaterias)
         {
             FacultadDAL facultad = new FacultadDAL();
 
 
-            DataTable dtfacultad = new DataTable();
+            Facultad facu = new Facultad();
+            MateriaFacultadBLL matFacuBLL = new MateriaFacultadBLL();
 
-            dtfacultad = cargarFacultadCod(codigo);
+            facu = facultad.cargarFacultadcod(paramFacultad.codigo);
 
-            if (dtfacultad.Rows.Count > 0)
+            if (facu == null || facu.codigo == paramFacultad.codigo)
             {
-                throw new Exception("El código ya existe en la base de datos.");
-            }
-            else
-            {
-                if (fechaCreacion.Year < 1900)
+                if (paramFacultad.fechaCreacion.Year < 1900)
                 {
                     throw new Exception("Fecha no permitida, introduce una fecha mayor a 1900.");
                 }
-                else if (fechaCreacion.Year > 2010)
+                else if (paramFacultad.fechaCreacion.Year > 2010)
                 {
                     throw new Exception("Fecha no permitida, introduce una fecha menor que 2010.");
                 }
                 else
                 {
-                    facultad.modificarFacultad(id, codigo, nombre, fechaCreacion, universidad, ciudad);
+                    using (TransactionScope ts = new TransactionScope())
+                    {
+                        facultad.modificarFacultad(paramFacultad);
+                        matFacuBLL.eliminarMaterias(paramFacultad.ID_Facultad);
+
+
+                        foreach (MateriaFacultad materia in listMaterias)
+                        {
+                            matFacuBLL.agregarMateriaFacultad(materia);
+                        }
+
+                        ts.Complete();
+                    }
+                    
                 }
+            }
+            else
+            {
+                throw new Exception("Código no vàlido.");
             }
         }
 
         public void eliminarFacultad(int matricula)
         {
             FacultadDAL facultad = new FacultadDAL();
-            facultad.eliminarFacultad(matricula);
+            MateriaFacultadBLL matFacultad = new MateriaFacultadBLL();
+
+            using(TransactionScope ts = new TransactionScope())
+            {
+                matFacultad.eliminarMaterias(matricula);
+                facultad.eliminarFacultad(matricula);
+
+                ts.Complete();
+            }
+
+            
         }
 
-        public DataTable cargarFacultadCod(string codigo)
+        /*public Facultad cargarFacultadCod(string codigo)
         {
             FacultadDAL facultad = new FacultadDAL();
             return facultad.cargarFacultadcod(codigo);
-        }
+        }*/
     }
 }

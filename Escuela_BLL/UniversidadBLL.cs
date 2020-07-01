@@ -10,7 +10,7 @@ namespace Escuela_BLL
 {
     public class UniversidadBLL
     { 
-        public DataTable cargarUniversidades()
+        public List<Universidad> cargarUniversidades()
         {
             UniversidadDAL facultad = new UniversidadDAL();
             return facultad.cargarUniversidades();

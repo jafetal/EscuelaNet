@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Escuela_BLL;
+using Escuela_DAL;
 
 namespace Escuela.Facultades
 {
@@ -22,6 +23,7 @@ namespace Escuela.Facultades
                     cargarUniversidades();
                     cargarEstados();
                     cargarFacultad(matricula);
+                    
                 }
                 else
                 {
@@ -55,30 +57,39 @@ namespace Escuela.Facultades
         public void cargarFacultad(int id)
         {
             FacultadBLL facuBLL = new FacultadBLL();
-            DataTable dtfacu = new DataTable();
+            Facultad facu = new Facultad();
 
-            dtfacu = facuBLL.cargarFacultad(id);
+            facu = facuBLL.cargarFacultad(id);
 
-            lblId.Text = dtfacu.Rows[0]["ID_Facultad"].ToString();
-            txtcodigo.Text = dtfacu.Rows[0]["codigo"].ToString();
-            txtNombre.Text = dtfacu.Rows[0]["nombre"].ToString();
-            txtFecha.Text = dtfacu.Rows[0]["fechaCreacion"].ToString().Substring(0, 10);
-            ddlUniversidad.SelectedValue = dtfacu.Rows[0]["universidad"].ToString();
+            lblId.Text = facu.ID_Facultad.ToString();
+            txtcodigo.Text = facu.codigo;
+            txtNombre.Text = facu.nombre;
+            txtFecha.Text = facu.fechaCreacion.ToString().Substring(0, 10);
+            ddlUniversidad.SelectedValue = facu.universidad.ToString();
 
             cargarEstados();
-            ddlEstados.SelectedValue = dtfacu.Rows[0]["estado"].ToString();
+            ddlEstados.SelectedValue = facu.Ciudad1.estado.ToString();
             cargarCiudades();
-            ddlCiudad.SelectedValue = dtfacu.Rows[0]["ciudad"].ToString();
+            ddlCiudad.SelectedValue = facu.ciudad.ToString();
+
+            cargarMaterias();
+            List<MateriaFacultad> listMaterias = new List<MateriaFacultad>();
+            listMaterias = facu.MateriaFacultad.ToList();
+
+            foreach(MateriaFacultad materiaFacu in listMaterias)
+            {
+                listBoxMaterias.Items.FindByValue(materiaFacu.materia.ToString()).Selected = true;
+            }
         }
 
         public void cargarUniversidades()
         {
             UniversidadBLL uniBLL = new UniversidadBLL();
-            DataTable dtUniversidades = new DataTable();
+            List<Universidad> listUniversidades = new List<Universidad>();
 
-            dtUniversidades = uniBLL.cargarUniversidades();
+            listUniversidades = uniBLL.cargarUniversidades();
 
-            ddlUniversidad.DataSource = dtUniversidades;
+            ddlUniversidad.DataSource = listUniversidades;
             ddlUniversidad.DataTextField = "nombre";
             ddlUniversidad.DataValueField = "ID_Universidad";
             ddlUniversidad.DataBind();
@@ -90,17 +101,32 @@ namespace Escuela.Facultades
         {
             FacultadBLL facuBLL = new FacultadBLL();
 
-            int id = int.Parse(lblId.Text);
-            string codigo = txtcodigo.Text;
-            string nombre = txtNombre.Text;
-            DateTime fechaCreacion = Convert.ToDateTime(txtFecha.Text);
-            int universidad = int.Parse(ddlUniversidad.SelectedValue);
-            int ciudad = int.Parse(ddlCiudad.SelectedValue);
+            Facultad facu = new Facultad();
+
+            facu.ID_Facultad = int.Parse(lblId.Text);
+            facu.codigo = txtcodigo.Text;
+            facu.nombre = txtNombre.Text;
+            facu.fechaCreacion = Convert.ToDateTime(txtFecha.Text);
+            facu.universidad = int.Parse(ddlUniversidad.SelectedValue);
+            facu.ciudad = int.Parse(ddlCiudad.SelectedValue);
 
             try
             {
-                facuBLL.modificarFacultad(id, codigo, nombre, fechaCreacion, universidad,ciudad);
+                MateriaFacultad materiaFacu;
+                List<MateriaFacultad> listMaterias = new List<MateriaFacultad>();
 
+                foreach (ListItem item in listBoxMaterias.Items)
+                {
+                    if (item.Selected)
+                    {
+                        materiaFacu = new MateriaFacultad();
+                        materiaFacu.materia = int.Parse(item.Value);
+                        materiaFacu.facultad = facu.ID_Facultad;
+                        listMaterias.Add(materiaFacu);
+                    }
+                }
+
+                facuBLL.modificarFacultad(facu, listMaterias);
             }
             catch (Exception ex)
             {
@@ -109,7 +135,18 @@ namespace Escuela.Facultades
             }
 
         }
+        public void cargarMaterias()
+        {
+            MateriaBLL materia = new MateriaBLL();
+            List<Materia> listMaterias = new List<Materia>();
 
+            listMaterias = materia.cargarMaterias();
+
+            listBoxMaterias.DataSource = listMaterias;
+            listBoxMaterias.DataTextField = "nombre";
+            listBoxMaterias.DataValueField = "ID_Materia";
+            listBoxMaterias.DataBind();
+        }
         public void cargarEstados()
         {
             EstadoBLL estado = new EstadoBLL();

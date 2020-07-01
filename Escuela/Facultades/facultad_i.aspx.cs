@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Escuela_BLL;
+using Escuela_DAL;
 
 namespace Escuela.Facultades
 {
@@ -21,7 +22,7 @@ namespace Escuela.Facultades
                     cargarUniversidades();
                     cargarEstados();
                     cargarTable();
-
+                    cargarMaterias();
                 }
                 else
                 {
@@ -35,6 +36,7 @@ namespace Escuela.Facultades
             agregarFacultad();
             Page.ClientScript.RegisterStartupScript(this.GetType(), "Alta", "alert('FAcultad agregada exitosamente')", true);
         }
+
 
         protected void ddlEstados_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -56,22 +58,31 @@ namespace Escuela.Facultades
         {
             FacultadBLL facuBLL = new FacultadBLL();
 
-            string codigo = txtcodigo.Text;
-            string nombre = txtNombre.Text;
-            DateTime fechaCreacion = Convert.ToDateTime(txtFecha.Text);
-            int universidad = int.Parse(ddlUniversidad.SelectedValue);
-            int ciudad = int.Parse(ddlCiudad.SelectedValue);
+            Facultad facultad = new Facultad();
+            facultad.codigo = txtcodigo.Text;
+            facultad.nombre = txtNombre.Text;
+            facultad.fechaCreacion = Convert.ToDateTime(txtFecha.Text);
+            facultad.universidad = int.Parse(ddlUniversidad.SelectedValue);
+            facultad.ciudad = int.Parse(ddlCiudad.SelectedValue);
             try
             {
-                facuBLL.agregarFacultad(codigo, nombre, fechaCreacion, universidad,ciudad);
+
+                MateriaFacultad materiaFacu;
+                List<MateriaFacultad> listMaterias = new List<MateriaFacultad>();
+
+                foreach (ListItem item in listBoxMaterias.Items)
+                {
+                    if (item.Selected)
+                    {
+                        materiaFacu = new MateriaFacultad();
+                        materiaFacu.materia = int.Parse(item.Value);
+                        materiaFacu.facultad = facultad.ID_Facultad;
+                        listMaterias.Add(materiaFacu);
+                    }
+                }
+
+                facuBLL.agregarFacultad(facultad,listMaterias);
                 limpiarCampos();
-
-                DataTable dtFacultades = new DataTable();
-                dtFacultades = (DataTable)ViewState["tablaFacultades"];
-                dtFacultades.Rows.Add(codigo, nombre);
-
-                grd_alumnos.DataSource = dtFacultades;
-                grd_alumnos.DataBind();
             }
             catch (Exception ex)
             {
@@ -83,17 +94,29 @@ namespace Escuela.Facultades
         public void cargarUniversidades()
         {
             UniversidadBLL uniBLL = new UniversidadBLL();
-            DataTable dtUniversidades = new DataTable();
+            List<Universidad> listUniversidades = new List<Universidad>();
 
-            dtUniversidades = uniBLL.cargarUniversidades();
+            listUniversidades = uniBLL.cargarUniversidades();
 
-            ddlUniversidad.DataSource = dtUniversidades;
+            ddlUniversidad.DataSource = listUniversidades;
             ddlUniversidad.DataTextField = "nombre";
             ddlUniversidad.DataValueField = "ID_Universidad";
             ddlUniversidad.DataBind();
 
             ddlUniversidad.Items.Insert(0, new ListItem("---- Seleccione Universidad ----", "0"));
+        }
 
+        public void cargarMaterias()
+        {
+            MateriaBLL materia = new MateriaBLL();
+            List<Materia> listMaterias = new List<Materia>();
+
+            listMaterias = materia.cargarMaterias();
+
+            listBoxMaterias.DataSource = listMaterias;
+            listBoxMaterias.DataTextField = "nombre";
+            listBoxMaterias.DataValueField = "ID_Materia";
+            listBoxMaterias.DataBind();
         }
 
         public void cargarTable()
@@ -153,6 +176,7 @@ namespace Escuela.Facultades
                 return false;
             }
         }
+
 
         #endregion
 

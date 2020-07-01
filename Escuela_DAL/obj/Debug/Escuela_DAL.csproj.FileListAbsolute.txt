@@ -8,3 +8,7 @@ C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_DAL\bin\Debug\Escuela_DAL
 C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_DAL\obj\Debug\Escuela_DAL.csprojAssemblyReference.cache
 C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_DAL\obj\Debug\Escuela_DAL.dll
 C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_DAL\obj\Debug\Escuela_DAL.pdb
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_DAL\bin\Debug\Escuela_DAL.dll.config
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_DAL\bin\Debug\EntityFramework.dll
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_DAL\bin\Debug\EntityFramework.xml
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_DAL\obj\Debug\Escuela_DAL.csproj.CopyComplete

@@ -10,27 +10,18 @@ namespace Escuela_DAL
 {
     public class UniversidadDAL
     {
-        public DataTable cargarUniversidades()
+        EscuelaEntities modelo;
+
+        public UniversidadDAL()
         {
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = @"Server=DESKTOP-1NP1QCU\SQLEXPRESS;Database=Escuela;Trusted_connection=true";
+            modelo = new EscuelaEntities();
+        }
+        public List<Universidad> cargarUniversidades()
+        {
+            var universidades = from mUniversidades in modelo.Universidad
+                                select mUniversidades;
 
-            SqlCommand command = new SqlCommand();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = "sp_cargarUniversidades"; //Procedimiento a agregar.
-            command.Connection = connection;
-
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            DataTable dtFacultades = new DataTable();
-
-            connection.Open();
-
-            adapter.SelectCommand = command;
-            adapter.Fill(dtFacultades);
-
-            connection.Close();
-
-            return dtFacultades;
+            return universidades.ToList();
         }
     }
 }

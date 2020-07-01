@@ -19,7 +19,7 @@ namespace Escuela.Facultades
             {
                 if (sessionIniciada())
                 {
-                    grd_facultades.DataSource = cargarFacultades();
+                    grd_facultades.DataSource = (cargarFacultades());
                     grd_facultades.DataBind();
                 }
                 else
@@ -44,14 +44,14 @@ namespace Escuela.Facultades
         #endregion
 
         #region Métodos
-        public DataTable cargarFacultades()
+        public List<object> cargarFacultades()
         {
             FacultadBLL facuBLL = new FacultadBLL();
-            DataTable dtFacultades = new DataTable();
+            List<object> listFacultades = new List<object>();
 
-            dtFacultades = facuBLL.cargarFacultades();
+            listFacultades = facuBLL.cargarFacultades();
 
-            return dtFacultades;
+            return listFacultades;
         }
 
         public bool sessionIniciada()

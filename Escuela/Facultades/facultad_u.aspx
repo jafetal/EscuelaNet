@@ -57,6 +57,12 @@
             <td>
                 <asp:DropDownList ID="ddlCiudad" runat="server"></asp:DropDownList></td>
         </tr>
+        <tr>
+            <td>Materias:</td>
+            <td>
+                <asp:ListBox ID="listBoxMaterias" SelectionMode="Multiple"  cssClass="lista" Width="150px" runat="server"></asp:ListBox>
+            </td>
+        </tr>
          <tr>
             <td></td>
             <td>

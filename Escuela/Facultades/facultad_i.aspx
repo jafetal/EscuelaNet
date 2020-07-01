@@ -52,10 +52,16 @@
                     <td>
                         <asp:DropDownList ID="ddlCiudad" CssClass="lista" runat="server"></asp:DropDownList></td>
                 </tr>
+                <tr>
+                    <td>Materias:</td>
+                    <td>
+                        <asp:ListBox ID="listBoxMaterias" SelectionMode="Multiple" cssClass="lista" Width="150px" runat="server"></asp:ListBox>
+                    </td>
+                </tr>
                  <tr>
                     <td></td>
                     <td>
-                        <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click" ValidationGroup="vlg2"/>
+                        <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click" ValidationGroup="vlg2" style="height: 26px"/>
                     </td>
                 </tr>
             </table>
@@ -72,20 +78,15 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-
             $("#MainContent_txtFecha").datepicker({
                 changeMonth: true,
                 changeYear: true,
                 yerarRange: "1969:2008",
                 dateFormat: "dd-mm-yy"
             });
-
-            $(".lista").chosen();
-
+            //$(".lista").chosen();
         });
-
         var manager = Sys.WebForms.PageRequestManager.getInstance();
-
         manager.add_endRequest(function () {
             $("#MainContent_txtFecha").datepicker({
                 changeMonth: true,
@@ -93,8 +94,7 @@
                 yerarRange: "1969:2008",
                 dateFormat: "dd-mm-yy"
             });
-
-            $(".lista").chosen();
+            //$(".lista").chosen();
         });
     </script>
 </asp:Content>

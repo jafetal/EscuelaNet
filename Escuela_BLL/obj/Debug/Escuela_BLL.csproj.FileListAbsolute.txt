@@ -14,3 +14,6 @@ C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\obj\Debug\Escuela_BLL
 C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\obj\Debug\Escuela_BLL.csproj.CopyComplete
 C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\obj\Debug\Escuela_BLL.dll
 C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\obj\Debug\Escuela_BLL.pdb
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\bin\Debug\EntityFramework.dll
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\bin\Debug\Escuela_DAL.dll.config
+C:\Users\Jared\Desktop\Jafet\CDIS\Main\Escuela\Escuela_BLL\bin\Debug\EntityFramework.xml

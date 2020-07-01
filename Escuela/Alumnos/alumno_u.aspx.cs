@@ -56,7 +56,7 @@ namespace Escuela.Alumnos
     public void cargarFacultades()
     {
         FacultadBLL facuBLL = new FacultadBLL();
-        DataTable dtFacultades = new DataTable();
+        List<object> dtFacultades = new List<object>();
 
         dtFacultades = facuBLL.cargarFacultades();
 

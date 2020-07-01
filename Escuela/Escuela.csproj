@@ -140,6 +140,12 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\chosen.jquery.js" />
+    <Content Include="Scripts\images\ui-icons_444444_256x240.png" />
+    <Content Include="Scripts\images\ui-icons_555555_256x240.png" />
+    <Content Include="Scripts\images\ui-icons_777620_256x240.png" />
+    <Content Include="Scripts\images\ui-icons_777777_256x240.png" />
+    <Content Include="Scripts\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Scripts\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -288,6 +294,10 @@
     <ProjectReference Include="..\Escuela_BLL\Escuela_BLL.csproj">
       <Project>{20bf8bcf-7b2e-47d3-a8ce-6c25e7180533}</Project>
       <Name>Escuela_BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Escuela_DAL\Escuela_DAL.csproj">
+      <Project>{591cff6b-9b27-4cc6-81a0-85d335aba030}</Project>
+      <Name>Escuela_DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
