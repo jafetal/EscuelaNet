@@ -25,4 +25,23 @@
         </Columns>
     </asp:GridView>
 
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: '<%= ResolveUrl("~/ServicioWCFacultades.svc/ConsultaFacultadesJSON") %>',
+                success: function (data) {
+                    console.log("Llamada de ajax exitosa!");
+                    console.log(data);
+                },
+                error: function (e) {
+                    console.log("Llamada incorrecta o con error!");
+                    console.log(e);
+                }
+            });
+        });
+
+    </script>
+
 </asp:Content>
